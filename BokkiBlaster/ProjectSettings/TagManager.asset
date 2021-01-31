@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Bullet
+  - Platform
+  - Star
+  - HealthBar
   layers:
   - Default
   - TransparentFX
@@ -46,4 +51,16 @@ TagManager:
     locked: 0
   - name: Blaster
     uniqueID: 3284772885
+    locked: 0
+  - name: Enemy Sprite
+    uniqueID: 3658565599
+    locked: 0
+  - name: Heal Star
+    uniqueID: 1930398589
+    locked: 0
+  - name: Text
+    uniqueID: 3893308365
+    locked: 0
+  - name: Buttons
+    uniqueID: 3154676029
     locked: 0
