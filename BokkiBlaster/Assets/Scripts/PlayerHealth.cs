@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     public AudioSource audioOof;
+    public fakeHealthBar bar;
 
     void Start()
     {
@@ -36,13 +37,23 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(20);
             audioOof.Play();
         }
+        if (col.gameObject.tag == "Whale")
+        {
+            TakeDamage(20);
+            audioOof.Play();
+        }
+        if (col.gameObject.tag == "enemBullet")
+        {
+            TakeDamage(20);
+            audioOof.Play();
+        }
         if (col.gameObject.tag == "Star")
         {
             TakeDamage(-10);
         }
     }
 
-    void TakeDamage(int damage)
+    /** void TakeDamage(int damage)
     {
         currentHealth -= damage;
         if (currentHealth > maxHealth)
@@ -50,5 +61,21 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
         }
         healthBar.SetHealth(currentHealth);
+    } **/
+    void TakeDamage(int damage)
+    {
+        Debug.Log("Damage is: " + damage);
+        currentHealth -= damage;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        if(damage > 0) {
+            bar.healthBarSet();
+        }
+        if(damage < 0) {
+            bar.healthBarSetHeal();
+        }
+        Debug.Log("Current health: " + currentHealth);
     }
 }

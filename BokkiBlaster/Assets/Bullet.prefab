@@ -138,6 +138,7 @@ MonoBehaviour:
   bulletSpeed: 20
   rb: {fileID: 7665804579765272503}
   audioSplat: {fileID: 5790433899115142035}
+  despawnTime: 4
 --- !u!82 &-8753838974560901639
 AudioSource:
   m_ObjectHideFlags: 0

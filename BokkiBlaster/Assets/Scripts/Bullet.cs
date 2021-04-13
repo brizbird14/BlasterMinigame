@@ -9,12 +9,24 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed = 20f;
     public Rigidbody2D rb;
     public AudioSource audioSplat;
+    public float despawnTime;
+    private float despawnTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.up * bulletSpeed;
         audioSplat = GetComponent<AudioSource>();
+
+        despawnTimer = Time.time + despawnTime;
+        //Debug.Log("Spawned bullet");
+    }
+
+    void Update() {
+        if (despawnTimer < Time.time) {
+            Destroy(gameObject);
+            //Debug.Log("DESPAWN BULLET");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -25,7 +37,7 @@ public class Bullet : MonoBehaviour
             Destroy(col.gameObject);
             Destroy(gameObject);
             scoreScript.scoreValue += 1;
-            Debug.Log("hit");
+            //Debug.Log("hit");
         }
     }
 }

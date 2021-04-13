@@ -18,9 +18,22 @@ public class EnemyScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Platform")
+        if (col.gameObject.tag == "PlatformHealth")
         {
             Destroy(gameObject);
+        }
+        //if (col.gameObject.tag == "Enemy") {
+        //    Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>(), true);
+        //}
+        if (col.gameObject.tag == "Whale")
+        {
+            Destroy(gameObject);
+            Debug.Log("Hit whale");
+        }
+        if (col.gameObject.tag == "Ship")
+        {
+            Destroy(gameObject);
+            Debug.Log("Hit ship");
         }
     }
 

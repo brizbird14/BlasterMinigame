@@ -9,6 +9,14 @@ TagManager:
   - Platform
   - Star
   - HealthBar
+  - PlatformHealth
+  - Bulwark
+  - Rapid
+  - Spread
+  - Swift
+  - enemBullet
+  - Whale
+  - Ship
   layers:
   - Default
   - TransparentFX
@@ -49,11 +57,11 @@ TagManager:
   - name: Background
     uniqueID: 512109659
     locked: 0
-  - name: Blaster
-    uniqueID: 3284772885
-    locked: 0
   - name: Enemy Sprite
     uniqueID: 3658565599
+    locked: 0
+  - name: Blaster
+    uniqueID: 3284772885
     locked: 0
   - name: Heal Star
     uniqueID: 1930398589

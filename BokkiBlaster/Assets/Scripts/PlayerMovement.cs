@@ -41,14 +41,21 @@ public class PlayerMovement : MonoBehaviour
     private int maxHealth;
     public int enemyDamage;
     public int starRestore;
+    public GameObject bulwark;
 
+    public float speedEffectTimer;
+    private float speedEffectDuration;
 
+    private float unSwift;
+    public float swiftTimer;
+    private bool isSwift;
 
     void Start()
     {
         maxHealth = rocketHealth;
         rb2d = GetComponent<Rigidbody2D> ();
         //rocketHealth = 100;
+        isSwift = false;
     }
 
     void FixedUpdate()
@@ -56,6 +63,20 @@ public class PlayerMovement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         Vector2 movement = new Vector2(moveHorizontal, 0);
         rb2d.AddForce(movement * speed);
+        /**if (speedEffectTimer < Time.time)
+        {
+            speed = 50;
+        }**/
+    }
+
+    void Update()
+    {
+        if (isSwift == true) {
+            if (Time.time >= unSwift) {
+                speed = speed/2;
+                isSwift = false;
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -63,7 +84,20 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             rocketHealth = rocketHealth - enemyDamage;
-            Debug.Log(rocketHealth);
+            //Debug.Log(rocketHealth);
+            if (rocketHealth <= 0)
+            {
+                Destroy(gameObject);
+                Application.LoadLevel(0);
+                Debug.Log("Dead");
+                SceneManager.LoadScene(2);
+            }
+            Destroy(col.gameObject);
+        }
+        if (col.gameObject.tag == "enemBullet")
+        {
+            rocketHealth = rocketHealth - enemyDamage;
+            //Debug.Log(rocketHealth);
             if (rocketHealth <= 0)
             {
                 Destroy(gameObject);
@@ -78,9 +112,22 @@ public class PlayerMovement : MonoBehaviour
             if (rocketHealth < (maxHealth-starRestore))
             {
                 rocketHealth = rocketHealth + starRestore;
-                Debug.Log(rocketHealth);
+                //Debug.Log(rocketHealth);
             }
             Destroy(col.gameObject);
+        }
+        if (col.gameObject.tag == "Swift")
+        {
+            speed = speed*2;
+            Destroy(col.gameObject);
+            //speedEffectTimer = Time.time + speedEffectDuration;
+            unSwift = Time.time + swiftTimer;
+            isSwift = true;
+        }
+        if (col.gameObject.tag == "Bulwark")
+        {
+            Destroy(col.gameObject);
+            Instantiate(bulwark);
         }
     }
 
