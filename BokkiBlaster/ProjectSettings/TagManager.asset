@@ -17,6 +17,8 @@ TagManager:
   - enemBullet
   - Whale
   - Ship
+  - notesBW
+  - noteColor
   layers:
   - Default
   - TransparentFX
